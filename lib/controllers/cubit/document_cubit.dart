@@ -13,10 +13,20 @@ class DocumentCubit extends Cubit<DocumentState> {
     await selectDocument();
   }
 
+  Future<void> editDocument(PersonData personData) async {
+    final walletDatabase = WalletDatabase();
+    await walletDatabase.updatePerson(personData);
+    await selectDocument();
+  }
+
   Future<void> selectDocument() async {
     emit(DocumentLoading());
     final walletDatabase = WalletDatabase();
     final allPersons = await walletDatabase.getPersons();
-    emit(DocumentLoaded(list: allPersons));
+    if (allPersons.isEmpty) {
+      emit(DocumentEmpty());
+    } else {
+      emit(DocumentLoaded(list: allPersons));
+    }
   }
 }

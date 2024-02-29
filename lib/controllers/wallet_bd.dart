@@ -232,6 +232,7 @@ class WalletDatabase {
 
   Future<int> insertContact(ContactData contact) async {
     await open();
+    await createContactsTable();
     return await _database.insert('contacts', contact.toMap());
   }
 

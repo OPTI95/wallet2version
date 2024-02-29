@@ -2,27 +2,30 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:wallet/controllers/cubit/contact_cubit.dart';
 import 'package:wallet/controllers/wallet_bd.dart';
 import 'package:wallet/controllers/cubit/card_cubit.dart';
 import 'package:wallet/pages/card_pages/add_card_page.dart';
 import 'package:wallet/pages/card_pages/view_card_page.dart';
+import 'package:wallet/pages/visit_card_page/visit_add_card_page.dart';
+import 'package:wallet/pages/visit_card_page/visit_card_view_page.dart';
 import 'package:wallet/pages/welcome_pages.dart/second_welcome_page.dart';
 import 'package:wallet/pages/welcome_pages.dart/third_welcome_page.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DocumentPage extends StatefulWidget {
-  DocumentPage({super.key});
+class VisitCardPage extends StatefulWidget {
+  VisitCardPage({super.key});
   @override
-  State<DocumentPage> createState() => _DocumentPageState();
+  State<VisitCardPage> createState() => _VisitCardPageState();
 }
 
-class _DocumentPageState extends State<DocumentPage> {
+class _VisitCardPageState extends State<VisitCardPage> {
   final TextEditingController searchController = TextEditingController();
-  List<CardData> list = [];
+  List<ContactData> list = [];
   @override
   void initState() {
-    context.read<CardCubit>().loadCards();
+    context.read<ContactCubit>().selectContact();
     super.initState();
   }
 
@@ -55,19 +58,19 @@ class _DocumentPageState extends State<DocumentPage> {
                     controller: searchController,
                     style: const TextStyle(color: Colors.black, fontSize: 16),
                     onChanged: (value) {
-                      // if (context.read<CardCubit>().state is CardLoaded) {
-                      //   if (value.length > 2) {
-                      //     list = (context.read<CardCubit>().state as CardLoaded)
-                      //         .list
-                      //         .where((element) => element.name.contains(value))
-                      //         .toList();
-                      //     setState(() {});
-                      //   } else if (value.isEmpty) {
-                      //     list = (context.read<CardCubit>().state as CardLoaded)
-                      //         .list;
-                      //     setState(() {});
-                      //   }
-                      // }
+                      if (context.read<ContactCubit>().state is ContactLoaded) {
+                        if (value.length > 2) {
+                          list = (context.read<ContactCubit>().state as ContactLoaded)
+                              .list
+                              .where((element) => element.companyName.contains(value))
+                              .toList();
+                          setState(() {});
+                        } else if (value.isEmpty) {
+                          list = (context.read<ContactCubit>().state as ContactLoaded)
+                              .list;
+                          setState(() {});
+                        }
+                      }
                     },
                     decoration: InputDecoration(
                         hintText: "Поиск",
@@ -81,11 +84,12 @@ class _DocumentPageState extends State<DocumentPage> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: BorderSide.none)),
                   ))),
-          BlocBuilder<CardCubit, CardState>(
+          BlocBuilder<ContactCubit, ContactState>(
             builder: (context, state) {
-              if (state is CardLoaded) {
+              if (state is ContactLoaded) {
                 if (list.isEmpty) {
-                  list = (context.read<CardCubit>().state as CardLoaded).list;
+                  list = (context.read<ContactCubit>().state as ContactLoaded)
+                      .list;
                 }
                 return ListView.builder(
                   shrinkWrap: true,
@@ -99,17 +103,17 @@ class _DocumentPageState extends State<DocumentPage> {
                               context,
                               PageTransition(
                                   type: PageTransitionType.rightToLeft,
-                                  child: CardViewPage(index: index)),
+                                  child: VisitCardViewPage(index: index)),
                             );
                           },
-                          child: Text(list[index].name)),
+                          child: Text(list[index].companyName)),
                     );
                   },
                 );
-              } else if (state is CardEmpty) {
+              } else if (state is ContacEmpty) {
                 return Center(
                     child: Text(
-                  "Добавьте документ",
+                  "Добавьте визитную карту",
                   style: GoogleFonts.gabriela(
                     color: Color.fromARGB(255, 50, 43, 85),
                     fontWeight: FontWeight.w900,
@@ -132,7 +136,7 @@ class _DocumentPageState extends State<DocumentPage> {
                       context,
                       PageTransition(
                         type: PageTransitionType.rightToLeft,
-                        child: AddCardPage(),
+                        child: VisitCardAddPage(),
                       ),
                     );
                   },
@@ -141,7 +145,7 @@ class _DocumentPageState extends State<DocumentPage> {
                         Color.fromARGB(255, 50, 43, 85)),
                   ),
                   child: Text(
-                    "Добавить документ",
+                    "Добавить визитную карту",
                     style: GoogleFonts.gabriela(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

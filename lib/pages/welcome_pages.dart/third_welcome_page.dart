@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:wallet/pages/bottom_navigation_bar_page.dart';
 import 'package:wallet/pages/card_pages/card_page.dart';
 
 class ThirdWelcomePage extends StatelessWidget {
@@ -70,7 +71,7 @@ class ThirdWelcomePage extends StatelessWidget {
                           context,
                           PageTransition(
                             type: PageTransitionType.bottomToTop,
-                            child: CardPage(),
+                            child: BottomNavigationBarPage(),
                           ),
                         );
                       },

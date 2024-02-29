@@ -5,6 +5,7 @@ sealed class DocumentState {}
 
 final class DocumentInitial extends DocumentState {}
 final class DocumentLoading extends DocumentState {}
+final class DocumentEmpty extends DocumentState {}
 final class DocumentLoaded extends DocumentState {
   final List<PersonData> list;
 

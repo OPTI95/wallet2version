@@ -14,29 +14,85 @@ import 'package:wallet/pages/card_pages/card_page.dart';
 import 'package:intl/intl.dart';
 import 'package:wallet/pages/document_pages/document_page.dart';
 
-class DocumentAddPage extends StatefulWidget {
-  DocumentAddPage({super.key});
+class DocumentEditPage extends StatefulWidget {
+  DocumentEditPage({super.key});
 
   @override
-  State<DocumentAddPage> createState() => _DocumentAddPageState();
+  State<DocumentEditPage> createState() => _DocumentEditPageState();
 }
 
-class _DocumentAddPageState extends State<DocumentAddPage> {
-  final TextEditingController secondName = TextEditingController();
-  final TextEditingController firstName = TextEditingController();
-  final TextEditingController thirdName = TextEditingController();
-  final TextEditingController snils = TextEditingController();
-  final TextEditingController inn = TextEditingController();
-  final TextEditingController polisOMS = TextEditingController();
-  final TextEditingController numberPassport = TextEditingController();
-  final TextEditingController seriaPassport = TextEditingController();
-  final TextEditingController snilsPassport = TextEditingController();
-  final TextEditingController fromIssues = TextEditingController();
-  final TextEditingController codePassport = TextEditingController();
-  final TextEditingController placeBorn = TextEditingController();
+class _DocumentEditPageState extends State<DocumentEditPage> {
+  late final TextEditingController secondName;
+  late final TextEditingController firstName;
+  late final TextEditingController thirdName;
+  late final TextEditingController snils;
+  late final TextEditingController inn;
+  late final TextEditingController polisOMS;
+  late final TextEditingController numberPassport;
+  late final TextEditingController seriaPassport;
+  late final TextEditingController snilsPassport = TextEditingController();
+  late final TextEditingController fromIssues;
+  late final TextEditingController codePassport;
+  late final TextEditingController placeBorn;
   String selectedGender = '';
   DateTime selectedDateBorn = DateTime.now();
   DateTime selectedDateExit = DateTime.now();
+  @override
+  void initState() {
+    secondName = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .secondName);
+    firstName = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .firstName);
+    thirdName = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .thirdName);
+    snils = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .snils);
+    inn = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .inn);
+    polisOMS = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .polisOMS);
+    numberPassport = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .numberPassport);
+    seriaPassport = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .seriaPassport);
+    fromIssues = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .polisOMS);
+    codePassport = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .numberPassport);
+    placeBorn = TextEditingController(
+        text: (context.read<DocumentCubit>().state as DocumentLoaded)
+            .list[0]
+            .seriaPassport);
+    selectedGender =
+        (context.read<DocumentCubit>().state as DocumentLoaded).list[0].gender;
+    selectedDateBorn = (context.read<DocumentCubit>().state as DocumentLoaded)
+        .list[0]
+        .dateBorn;
+    selectedDateExit = (context.read<DocumentCubit>().state as DocumentLoaded)
+        .list[0]
+        .dateExit;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +116,7 @@ class _DocumentAddPageState extends State<DocumentAddPage> {
                         },
                         icon: const Icon(Icons.arrow_back)),
                     Text(
-                      'Добавление личной информации',
+                      'Изменение личной информации',
                       style: GoogleFonts.gabriela(
                         color: const Color.fromARGB(255, 50, 43, 85),
                         fontWeight: FontWeight.w900,
@@ -378,8 +434,11 @@ class _DocumentAddPageState extends State<DocumentAddPage> {
                   height: 60,
                   child: ElevatedButton(
                       onPressed: () async {
-                        context.read<DocumentCubit>().addDocument(PersonData(
-                            id: null,
+                        context.read<DocumentCubit>().editDocument(PersonData(
+                            id: (context.read<DocumentCubit>().state
+                                    as DocumentLoaded)
+                                .list[0]
+                                .id,
                             secondName: secondName.text,
                             firstName: firstName.text,
                             thirdName: thirdName.text,
@@ -408,7 +467,7 @@ class _DocumentAddPageState extends State<DocumentAddPage> {
                             Color.fromARGB(255, 50, 43, 85)),
                       ),
                       child: Text(
-                        "Добавить информацию",
+                        "Изменить информацию",
                         style: GoogleFonts.gabriela(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

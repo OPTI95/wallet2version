@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:wallet/controllers/wallet_bd.dart';
+import 'package:wallet/pages/bottom_navigation_bar_page.dart';
 import 'package:wallet/pages/card_pages/card_page.dart';
 
 class AddCardPage extends StatefulWidget {
@@ -47,8 +48,7 @@ class _AddCardPageState extends State<AddCardPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: [
               const SizedBox(
                 height: 10,
@@ -103,6 +103,10 @@ class _AddCardPageState extends State<AddCardPage> {
                       controller: barcode,
                       style: const TextStyle(color: Colors.black, fontSize: 16),
                       maxLines: 1,
+                      onChanged: (val) {
+                        _scanBarcode = val;
+                        setState(() {});
+                      },
                       decoration: InputDecoration(
                         hintText: "Штрих код",
                         hintStyle: const TextStyle(color: Colors.white70),
@@ -167,14 +171,27 @@ class _AddCardPageState extends State<AddCardPage> {
               ),
               _scanBarcode == ''
                   ? Container()
-                  : BarcodeWidget(
-                      barcode: Barcode.code128(),
-                      data: _scanBarcode,
-                      width: 200,
-                      height: 100,
-                      color: Colors.black,
-                      drawText: true,
-                      style: const TextStyle(fontSize: 16),
+                  : Column(
+                      children: [
+                        BarcodeWidget(
+                          barcode: Barcode.code128(),
+                          data: _scanBarcode,
+                          width: 200,
+                          height: 100,
+                          color: Colors.black,
+                          drawText: true,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        BarcodeWidget(
+                          barcode: Barcode.qrCode(),
+                          data: _scanBarcode,
+                          width: 200,
+                          height: 100,
+                          color: Colors.black,
+                          drawText: true,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
               const Spacer(),
               Padding(
@@ -195,7 +212,7 @@ class _AddCardPageState extends State<AddCardPage> {
                           context,
                           PageTransition(
                             type: PageTransitionType.topToBottom,
-                            child: CardPage(),
+                            child: BottomNavigationBarPage(),
                           ),
                         );
                       },

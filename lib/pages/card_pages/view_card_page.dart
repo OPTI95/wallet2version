@@ -51,7 +51,7 @@ class CardViewPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              ListView( children: [
             SizedBox(
               height: 10,
             ),

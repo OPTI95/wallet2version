@@ -18,7 +18,7 @@ class InnViewPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(24.0),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(
               height: 280,

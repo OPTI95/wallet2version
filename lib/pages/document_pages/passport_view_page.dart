@@ -22,7 +22,7 @@ class PassportViewPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Center(
             child: Padding(
@@ -221,7 +221,7 @@ class PassportViewPage extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 109, 109, 109),
-                                                      fontSize: 14),
+                                                      fontSize: 12),
                                                 ),
                                                 Wrap(children: [
                                                   Text(
@@ -230,7 +230,7 @@ class PassportViewPage extends StatelessWidget {
                                                         .toUpperCase(),
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16),
+                                                        fontSize: 14),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -241,7 +241,7 @@ class PassportViewPage extends StatelessWidget {
                                                         .toUpperCase(),
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16),
+                                                        fontSize: 14),
                                                   ),
                                                   SizedBox(
                                                     width: 5,
@@ -252,7 +252,7 @@ class PassportViewPage extends StatelessWidget {
                                                         .toUpperCase(),
                                                     style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 16),
+                                                        fontSize: 14),
                                                   ),
                                                 ]),
                                                 SizedBox(
@@ -274,7 +274,7 @@ class PassportViewPage extends StatelessWidget {
                                                                   109,
                                                                   109,
                                                                   109),
-                                                              fontSize: 14),
+                                                              fontSize: 12),
                                                         ),
                                                         Text(
                                                           state.list[index].gender
@@ -285,7 +285,7 @@ class PassportViewPage extends StatelessWidget {
                                                               : "ЖЕНСКИЙ",
                                                           style: TextStyle(
                                                               color: Colors.black,
-                                                              fontSize: 16),
+                                                              fontSize: 14),
                                                         ),
                                                       ],
                                                     ),
@@ -302,7 +302,7 @@ class PassportViewPage extends StatelessWidget {
                                                                   109,
                                                                   109,
                                                                   109),
-                                                              fontSize: 14),
+                                                              fontSize: 12),
                                                         ),
                                                         Text(
                                                           DateFormat('dd.MM.yyyy')
@@ -312,7 +312,7 @@ class PassportViewPage extends StatelessWidget {
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: Colors.black,
-                                                              fontSize: 16),
+                                                              fontSize: 14),
                                                         )
                                                       ],
                                                     ),
@@ -326,7 +326,7 @@ class PassportViewPage extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 109, 109, 109),
-                                                      fontSize: 14),
+                                                      fontSize: 12),
                                                 ),
                                                 Text(
                                                   state.list[index].placeBorn
@@ -334,7 +334,7 @@ class PassportViewPage extends StatelessWidget {
                                                       .toUpperCase(),
                                                   style: TextStyle(
                                                       color: Colors.black,
-                                                      fontSize: 16),
+                                                      fontSize: 14),
                                                 ),
                                               ],
                                             ),
