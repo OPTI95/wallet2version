@@ -169,6 +169,20 @@ class _AddCardPageState extends State<AddCardPage> {
                   ),
                 ),
               ),
+              ElevatedButton(
+                onPressed: () {},
+                style: const ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(Color.fromARGB(255, 50, 43, 85)),
+                ),
+                child: Text(
+                  "Выбрать шаблон",
+                  style: GoogleFonts.gabriela(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
               _scanBarcode == ''
                   ? Container()
                   : Column(

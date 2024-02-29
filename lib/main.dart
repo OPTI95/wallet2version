@@ -6,6 +6,7 @@ import 'package:wallet/controllers/cubit/document_cubit.dart';
 import 'package:wallet/pages/bottom_navigation_bar_page.dart';
 import 'package:wallet/pages/card_pages/add_card_page.dart';
 import 'package:wallet/pages/card_pages/card_page.dart';
+import 'package:wallet/pages/card_pages/perekrestok_shablon_page.dart';
 import 'package:wallet/pages/document_pages/document_add_page.dart';
 import 'package:wallet/pages/document_pages/document_page.dart';
 import 'package:wallet/pages/document_pages/document_shablon_page.dart';
@@ -42,7 +43,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         //   debugShowCheckedModeBanner: false, home: PolisOMSPage()),
-         debugShowCheckedModeBanner: false, home: FirstWelcomePage()),
+         debugShowCheckedModeBanner: false, home: PerekrestokPage()),
     );
   }
 }
